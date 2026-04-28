@@ -95,18 +95,19 @@ export function Hero() {
             </Link>
           </Button>
         </div>
-      </div>
 
-      {/* Scroll cue */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in"
-        style={{ animationDelay: "1100ms" }}
-      >
-        <div className="flex flex-col items-center gap-2">
-          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-brand-ink/40">
-            Scroll
-          </span>
-          <div className="h-12 w-px bg-gradient-to-b from-brand-ink/30 to-transparent" />
+        {/* Scroll cue — sits below CTAs in normal flow so it can never overlap */}
+        <div
+          className="mt-16 md:mt-20 flex justify-center opacity-0 animate-fade-in pointer-events-none"
+          style={{ animationDelay: "1100ms" }}
+          aria-hidden="true"
+        >
+          <div className="flex flex-col items-center gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-brand-ink/40">
+              Scroll
+            </span>
+            <div className="h-12 w-px bg-gradient-to-b from-brand-ink/30 to-transparent" />
+          </div>
         </div>
       </div>
     </section>
