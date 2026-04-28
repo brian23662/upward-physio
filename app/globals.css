@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand-aligned semantic tokens (HSL for shadcn) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 16%; /* #292828 brand ink */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 16%;
+
+    --primary: 174 94% 35%; /* #05ad9e brand teal */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 16%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 28 67% 56%; /* #db8c41 brand orange */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 174 94% 35%;
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  /* Editorial display headings */
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Section number — small typographic accent that runs through the home page */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-brand-teal;
+  }
+
+  /* Reusable subtle gradient backdrop used behind hero / accents */
+  .bg-grain {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(41, 40, 40, 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  /* Underline link reveal used in nav and footer */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-px w-0 bg-current transition-all duration-300 ease-out;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Responsive fluid display sizes — used for big hero/section titles */
+  .text-display-xl {
+    font-size: clamp(2.75rem, 7vw, 6rem);
+    line-height: 0.95;
+  }
+  .text-display-lg {
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+    line-height: 1;
+  }
+  .text-display-md {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.05;
+  }
+}
