@@ -1,5 +1,7 @@
 import { Hero } from "@/components/sections/hero";
+import { AboutSection } from "@/components/sections/about-section";
 import { ServiceSection } from "@/components/sections/service-section";
+import { HowItWorksSection } from "@/components/sections/how-it-works-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { SERVICES } from "@/lib/services";
 
@@ -7,6 +9,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+
+      {/* Trust-builder before the service evaluation begins */}
+      <AboutSection />
 
       {/* Five service sections, alternating layout each row */}
       {SERVICES.map((service, i) => (
@@ -17,6 +22,9 @@ export default function HomePage() {
           isFirst={i === 0}
         />
       ))}
+
+      {/* "Here's how it works" — answers practical questions before the form */}
+      <HowItWorksSection />
 
       <ContactSection />
     </>
