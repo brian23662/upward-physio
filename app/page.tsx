@@ -14,7 +14,6 @@ export default function HomePage() {
           key={service.slug}
           service={service}
           reverse={i % 2 === 1}
-          isFirst={i === 0}
         />
       ))}
 

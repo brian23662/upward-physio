@@ -11,8 +11,6 @@ interface ServiceSectionProps {
   service: Service;
   /** Even-indexed sections put video on the right; odd reverse it. */
   reverse?: boolean;
-  /** Whether this is the first/anchor section, gets a slightly different intro. */
-  isFirst?: boolean;
 }
 
 /**
@@ -22,16 +20,11 @@ interface ServiceSectionProps {
 export function ServiceSection({
   service,
   reverse = false,
-  isFirst = false,
 }: ServiceSectionProps) {
   return (
     <section
       id={service.slug}
-      className={cn(
-        "relative py-20 md:py-32",
-        // First section gets a subtle textured background to separate from hero
-        isFirst && "bg-grain"
-      )}
+      className="relative py-20 md:py-32 bg-[#f4f4f4]"
     >
       <div className="container">
         <div
@@ -69,21 +62,10 @@ export function ServiceSection({
 
           {/* Video column */}
           <div className="lg:col-span-6">
-            <div className="relative">
-              {/* Decorative offset square — adds editorial depth */}
-              <div
-                className={cn(
-                  "absolute -inset-4 rounded-2xl border border-brand-teal/15 -z-0",
-                  reverse ? "translate-x-3 translate-y-3" : "-translate-x-3 translate-y-3"
-                )}
-                aria-hidden="true"
-              />
-              <VideoPlayer
-                src={service.videoSrc}
-                aspectClassName="aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5]"
-                className="relative z-10"
-              />
-            </div>
+            <VideoPlayer
+              src={service.videoSrc}
+              aspectClassName="aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5]"
+            />
           </div>
         </div>
       </div>
