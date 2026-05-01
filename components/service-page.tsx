@@ -22,7 +22,11 @@ export function ServicePage({ slug }: ServicePageProps) {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-[#f4f4f4]">
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-grain opacity-40 pointer-events-none"
+        />
         <div className="container relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <div className="lg:col-span-6">
@@ -60,11 +64,18 @@ export function ServicePage({ slug }: ServicePageProps) {
             </div>
 
             <div className="lg:col-span-6">
-              <VideoPlayer
-                src={service.videoSrc}
-                autoPlayImmediately
-                aspectClassName="aspect-[4/5] md:aspect-[3/4]"
-              />
+              <div className="relative">
+                <div
+                  className="absolute -inset-4 rounded-2xl border border-brand-teal/15 -translate-x-3 translate-y-3 -z-0"
+                  aria-hidden="true"
+                />
+                <VideoPlayer
+                  src={service.videoSrc}
+                  autoPlayImmediately
+                  aspectClassName="aspect-[4/5] md:aspect-[3/4]"
+                  className="relative z-10"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -79,15 +79,15 @@ export function VideoPlayer({
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-hidden rounded-2xl bg-[#f4f4f4] group",
+        "relative overflow-hidden rounded-2xl bg-brand-ink/5 group",
         aspectClassName,
         className
       )}
     >
-      {/* Solid placeholder while video loads — matches surrounding background */}
+      {/* subtle gradient backdrop while video loads */}
       <div
         className={cn(
-          "absolute inset-0 bg-[#f4f4f4] transition-opacity duration-700",
+          "absolute inset-0 bg-gradient-to-br from-brand-teal/5 via-white to-brand-orange/5 transition-opacity duration-700",
           loaded ? "opacity-0" : "opacity-100"
         )}
       />
@@ -105,6 +105,8 @@ export function VideoPlayer({
           loaded ? "opacity-100" : "opacity-0"
         )}
       />
+      {/* Faint frame */}
+      <div className="absolute inset-0 ring-1 ring-inset ring-brand-ink/5 rounded-2xl pointer-events-none" />
     </div>
   );
 }
