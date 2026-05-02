@@ -49,13 +49,13 @@ export function Navbar() {
       <div className="container flex h-20 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group" aria-label="Upward Physio home">
-          <div className="relative h-10 w-[60px]">
+          <div className="relative h-10 w-10 overflow-hidden rounded-md">
             <Image
-              src="/logo.svg"
+              src="/logo.jpg"
               alt="Upward Physio"
               fill
-              sizes="60px"
-              className="object-contain"
+              sizes="40px"
+              className="object-cover"
               priority
             />
           </div>

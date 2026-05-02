@@ -10,13 +10,13 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-5">
             <Link href="/" className="inline-flex items-center gap-3">
-              <div className="relative h-12 w-[72px]">
+              <div className="relative h-12 w-12 overflow-hidden rounded-md">
                 <Image
-                  src="/logo.svg"
+                  src="/logo.jpg"
                   alt="Upward Physio"
                   fill
-                  sizes="72px"
-                  className="object-contain"
+                  sizes="48px"
+                  className="object-cover"
                 />
               </div>
               <div className="flex flex-col leading-none">
