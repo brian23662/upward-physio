@@ -36,6 +36,7 @@ export function Navbar() {
    * on service pages we navigate home to the form anchor.
    */
   const contactHref = "/#contact";
+  const aboutHref = "/#about";
 
   return (
     <header
@@ -71,6 +72,12 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-8">
+          <Link
+            href={aboutHref}
+            className="link-underline text-sm text-brand-ink/80 hover:text-brand-ink transition-colors"
+          >
+            About
+          </Link>
           {SERVICES.map((service) => (
             <Link
               key={service.slug}
@@ -102,10 +109,20 @@ export function Navbar() {
       <div
         className={cn(
           "lg:hidden overflow-hidden transition-all duration-300 ease-out bg-white border-t border-brand-ink/5",
-          mobileOpen ? "max-h-[500px]" : "max-h-0"
+          mobileOpen ? "max-h-[600px]" : "max-h-0"
         )}
       >
         <nav className="container py-6 flex flex-col gap-1">
+          <Link
+            href={aboutHref}
+            onClick={() => setMobileOpen(false)}
+            className="flex items-baseline gap-4 py-3 border-b border-brand-ink/5 group"
+          >
+            <span className="font-mono text-xs text-brand-teal">00</span>
+            <span className="font-display text-xl text-brand-ink group-hover:text-brand-teal transition-colors">
+              About
+            </span>
+          </Link>
           {SERVICES.map((service, i) => (
             <Link
               key={service.slug}
