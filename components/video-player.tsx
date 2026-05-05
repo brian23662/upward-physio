@@ -13,9 +13,9 @@ interface VideoPlayerProps {
 }
 
 /**
- * Plays the video exactly once when its container enters the viewport.
- * Uses Intersection Observer with a small threshold so it doesn't fire
- * prematurely. Falls back to immediate play if `autoPlayImmediately` is set.
+ * Plays the video from the start each time its container enters the viewport,
+ * and pauses it when scrolled away. No looping — a single playthrough per
+ * scroll-in. Falls back to immediate play if `autoPlayImmediately` is set.
  *
  * Videos are muted + playsInline so iOS allows autoplay without user gesture.
  */
@@ -27,7 +27,6 @@ export function VideoPlayer({
 }: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hasPlayedRef = useRef(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -40,7 +39,6 @@ export function VideoPlayer({
         // Autoplay may be blocked; that's fine, the controls are still there
         // if needed. We swallow the error silently.
       });
-      hasPlayedRef.current = true;
       return;
     }
 
@@ -50,20 +48,18 @@ export function VideoPlayer({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasPlayedRef.current) {
+          if (entry.isIntersecting) {
+            // Restart from the beginning each time the video re-enters view.
             video.currentTime = 0;
             const playPromise = video.play();
             if (playPromise !== undefined) {
-              playPromise
-                .then(() => {
-                  hasPlayedRef.current = true;
-                })
-                .catch(() => {
-                  // Browser blocked autoplay; nothing we can do silently.
-                });
-            } else {
-              hasPlayedRef.current = true;
+              playPromise.catch(() => {
+                // Browser blocked autoplay; nothing we can do silently.
+              });
             }
+          } else {
+            // Pause when scrolled out of view to avoid wasted cycles.
+            video.pause();
           }
         });
       },
@@ -97,7 +93,7 @@ export function VideoPlayer({
         muted
         playsInline
         preload="metadata"
-        // We never want it to loop — spec says play exactly once.
+        // Single playthrough per scroll-in — no looping.
         loop={false}
         onLoadedData={() => setLoaded(true)}
         className={cn(
